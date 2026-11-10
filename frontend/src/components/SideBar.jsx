@@ -132,7 +132,7 @@ function SideBar() {
     <>
       <aside
         className={`
-          fixed lg:relative inset-y-0 left-0 z-50 flex h-screen shrink-0 flex-col
+          relative z-10 flex h-screen shrink-0 flex-col
           bg-[#ffffff] text-[#37344d] border-r border-[#eceaf3] shadow-[8px_0_28px_rgba(74,62,140,0.04)]
           ${isResizing ? "transition-none select-none" : "transition-[width] duration-200 ease-out"}
           ${collapsed ? "w-[84px]" : ""}

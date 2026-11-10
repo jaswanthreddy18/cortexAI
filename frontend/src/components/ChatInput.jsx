@@ -218,7 +218,7 @@ const ChatInput = () => {
   useEffect(() => () => speechRecognitionRef.current?.stop(), []);
 
   return (
-    <div className="w-full px-4 pb-6 pt-3 sm:px-8" style={{ paddingBottom: '24px' }}>
+    <div className="w-full px-3 pb-[max(16px,env(safe-area-inset-bottom))] pt-3 sm:px-8 md:px-6">
       <div
         ref={composerRef}
         className="chat-composer mx-auto w-full px-3 py-2 sm:px-4 sm:py-2.5"

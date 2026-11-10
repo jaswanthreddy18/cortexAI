@@ -31,10 +31,42 @@ body,
 }
 
 .app-shell {
+  height: 100dvh;
   background:
     radial-gradient(ellipse at 68% 28%, rgba(132, 122, 246, 0.08), transparent 34%),
     radial-gradient(ellipse at 52% 84%, rgba(190, 222, 250, 0.12), transparent 40%),
     #f7f8fc;
+}
+
+@media (max-width: 767px) {
+  .app-shell > aside {
+    display: none;
+  }
+
+  .chat-main {
+    width: 100%;
+    height: 100dvh;
+  }
+
+  .chat-composer {
+    border-radius: 16px !important;
+  }
+
+  .app-shell .chat-composer textarea {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .app-shell > main > section > div:first-child {
+    padding: 1rem;
+  }
+
+  .app-shell > main > section > div:first-child h2,
+  .app-shell > main > section > div:first-child p.text-2xl {
+    font-size: clamp(1.25rem, 6vw, 1.65rem);
+    line-height: 1.25;
+  }
 }
 
 .chat-main {
