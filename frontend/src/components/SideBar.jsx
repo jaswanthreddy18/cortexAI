@@ -20,7 +20,7 @@ const navigation = [
   { label: "New chat", icon: Plus, active: true },
 ];
 
-function SideBar() {
+function SideBar({ isMobileOpen = false, onCloseMobile = () => {} }) {
   const [collapsed, setCollapsed] = useState(false);
   const [creating, setCreating] = useState(false);
   const [showLogoutConfirm, setShowLogoutConfirm] = useState(false);
@@ -94,6 +94,7 @@ function SideBar() {
   const handleSelectConversation = (conversation) => {
     setSelectedChatId(conversation._id);
     dispatch(setSelectedConversation(conversation));
+    onCloseMobile();
   };
 
   const handleCreateConversation = async () => {
@@ -105,6 +106,7 @@ function SideBar() {
     if (data?.conversation) {
       dispatch(addConversation(data.conversation));
       setSelectedChatId(data.conversation._id);
+      onCloseMobile();
     }
 
     setCreating(false);
@@ -130,12 +132,14 @@ function SideBar() {
 
   return (
     <>
+      {isMobileOpen && <button type="button" aria-label="Close sidebar" onClick={onCloseMobile} className="mobile-sidebar-backdrop fixed inset-0 z-40 bg-slate-950/30 backdrop-blur-[2px] md:hidden" />}
       <aside
         className={`
           relative z-10 flex h-screen shrink-0 flex-col
           bg-[#ffffff] text-[#37344d] border-r border-[#eceaf3] shadow-[8px_0_28px_rgba(74,62,140,0.04)]
           ${isResizing ? "transition-none select-none" : "transition-[width] duration-200 ease-out"}
           ${collapsed ? "w-[84px]" : ""}
+          ${isMobileOpen ? "mobile-sidebar-open" : ""}
         `}
         style={collapsed ? undefined : { width: sidebarWidth }}
       >

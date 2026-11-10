@@ -12,6 +12,7 @@ const Home = ({ isCheckingSession }) => {
   const dispatch = useDispatch();
   const { userData } = useSelector((state) => state.user);
   const [isSigningIn, setIsSigningIn] = useState(false);
+  const [isMobileSidebarOpen, setIsMobileSidebarOpen] = useState(false);
   const handleLogin = async (token) => {
     const { data } = await api.post("/api/auth/login", { token });
     dispatch(setUserData(data));
@@ -40,8 +41,11 @@ const Home = ({ isCheckingSession }) => {
 
   return (
     <div className="app-shell fixed inset-0 z-50 flex text-[#28253c]">
-      <SideBar />
-      <ChatArea />
+      <SideBar
+        isMobileOpen={isMobileSidebarOpen}
+        onCloseMobile={() => setIsMobileSidebarOpen(false)}
+      />
+      <ChatArea onOpenSidebar={() => setIsMobileSidebarOpen(true)} />
     </div>
   );
 }

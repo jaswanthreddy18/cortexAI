@@ -1,12 +1,12 @@
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { Check, Moon, MoreHorizontal, Share2, Sun, Trash2 } from "lucide-react";
+import { Check, Moon, MoreHorizontal, PanelLeftOpen, Share2, Sun, Trash2 } from "lucide-react";
 import CortexLogo from "./CortexLogo";
 import { deleteConversation } from "../features/deleteConversation";
 import { removeConversation, setSelectedConversation } from "../redux/conversationSlice";
 import { setMessages } from "../redux/messageSlice";
 
-const Nav = () => {
+const Nav = ({ onOpenSidebar }) => {
     const [shareStatus, setShareStatus] = useState("");
     const [isOptionsOpen, setIsOptionsOpen] = useState(false);
     const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
@@ -107,6 +107,9 @@ const Nav = () => {
         <>
         <header className="flex h-16 shrink-0 items-center justify-between border-b border-[#eceaf3] bg-white/85 px-5 backdrop-blur-xl">
             <div className="flex min-w-0 items-center gap-3">
+                <button type="button" onClick={onOpenSidebar} aria-label="Open sidebar" title="Open sidebar" className="mobile-sidebar-trigger grid h-9 w-9 shrink-0 place-items-center rounded-xl border border-[#eceaf3] text-[#655be8]">
+                    <PanelLeftOpen size={18} />
+                </button>
                 <CortexLogo size={34} className="shrink-0" />
 
                 <div className="flex min-w-0 items-center gap-2">

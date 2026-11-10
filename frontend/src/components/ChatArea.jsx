@@ -2,11 +2,12 @@ import MessageList from './MessageList'
 import ChatInput from './ChatInput'
 import Nav from './Nav'
 import { useEffect, useRef } from 'react'
+import { PanelLeftOpen } from 'lucide-react'
 import { useDispatch, useSelector } from 'react-redux'
 import { setMessages } from '../redux/messageSlice'
 import getMessages from '../features/getMessages'
 
-const ChatArea = () => {
+const ChatArea = ({ onOpenSidebar }) => {
    const selectedConversation = useSelector(
         (state) => state.conversation.selectedConversation
     );
@@ -58,9 +59,12 @@ const ChatArea = () => {
   }, [dispatch, selectedConversationId]);
   return (
     <main className="chat-main relative flex h-screen min-w-0 flex-1 flex-col overflow-hidden">
-        <Nav />
+        <Nav onOpenSidebar={onOpenSidebar} />
         {isEmptyChat ? (
           <section className="flex min-h-0 flex-1 flex-col items-center justify-center">
+            <button type="button" onClick={onOpenSidebar} aria-label="Open sidebar" title="Open sidebar" className="mobile-sidebar-trigger absolute left-3 top-3 z-20 grid h-10 w-10 place-items-center rounded-xl border border-[#eceaf3] bg-white/90 text-[#655be8] shadow-sm backdrop-blur">
+              <PanelLeftOpen size={19} />
+            </button>
             <MessageList />
             <ChatInput />
           </section>
